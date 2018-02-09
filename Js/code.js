@@ -40,6 +40,7 @@ setTimeout(function () {
     document.getElementById("box").style.height = widthy;
     document.getElementById("box").style.display = "block";
     createdTime = Date.now();
+    return widthy;
 
 },time);
 }
@@ -49,12 +50,12 @@ document.getElementById("box").onclick=function (event) {
     reactioTime = (clickedTime - createdTime)/1000;
     document.getElementById("reactionTime").innerText = "Your reaction time is:"+ reactioTime + "seconds"  + "\n"+ document.getElementById("reactionTime").innerText ;
     this.style.display = "none";
-    intialCoordinate = makeBox(event);
+    width = makeBox();
     var xFinal = event.clientX;
     var yFinal =event.clientY;
 
     document.getElementById("distance").innerText = "Your distance is " + xFinal + " " + yFinal +"\n"+ document.getElementById("distance").innerText; //calculateDistance(xFinal,yFinal,intialCoordinate[0],intialCoordinate[1]);
-
+    document.getElementById("width").innerText = "Your width of square is " + width;
 };
 
 function  calculateDistance(xf,yf,xi,yi) {
