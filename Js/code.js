@@ -55,7 +55,7 @@ document.getElementById("box").onclick=function (event) {
     var yFinal =event.clientY;
 
     document.getElementById("distance").innerText = "Your distance is " + xFinal + " " + yFinal +"\n"+ document.getElementById("distance").innerText; //calculateDistance(xFinal,yFinal,intialCoordinate[0],intialCoordinate[1]);
-    document.getElementById("width").innerText = "Your width of square is " +  document.getElementById("box").style.width + "\n" document.getElementById("width").innerText;
+    document.getElementById("width").innerText = "Your width of square is " +  document.getElementById("box").style.width + "\n" + document.getElementById("width").innerText;
 };
 
 function  calculateDistance(xf,yf,xi,yi) {
