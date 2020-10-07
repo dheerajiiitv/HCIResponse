@@ -4,3 +4,7 @@
     display: none;
     position: relative;
 }
+body {
+
+	background-image: url('../images/background.jpg');
+}
