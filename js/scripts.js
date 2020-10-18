@@ -6,8 +6,20 @@
 
 
 (function($) {
-    "use strict"; 
-	
+    "use strict";
+    var firebaseConfig = {
+        apiKey: "AIzaSyDZ6Z4WeIEhwOQHWvLqGmel9hq5oJrnlfE",
+        authDomain: "distractions-free.firebaseapp.com",
+        databaseURL: "https://distractions-free.firebaseio.com",
+        projectId: "distractions-free",
+        storageBucket: "distractions-free.appspot.com",
+        messagingSenderId: "103532426034",
+        appId: "1:103532426034:web:f146198ea46ade521e1d2b",
+        measurementId: "G-0MRMEMSNZS"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
 	/* Preloader */
 	$(window).on('load', function() {
 		var preloaderFadeOutTime = 500;
@@ -283,26 +295,34 @@
 
     function nsubmitForm() {
         // initiate variables with form content
+
+        let dbRef = firebase.firestore();
+
+        var name  = $("#name").val();
 		var email = $("#nemail").val();
-        var terms = $("#nterms").val();
-        $.ajax({
-            type: "POST",
-            url: "php/newsletterform-process.php",
-            data: "email=" + email + "&terms=" + terms, 
-            success: function(text) {
-                if (text == "success") {
-                    nformSuccess();
-                } else {
-                    nformError();
-                    nsubmitMSG(false, text);
-                }
-            }
-        });
-	}
+        var terms = $("#nterms").is(":checked");
+        var description  = $("#ntext").val();
+        var request_type = $("#request_type").val();
+        dbRef.collection("user-feedback").add({
+            'name':name,
+            'email':email,
+            'get updates':terms,
+            'request description':description,
+            'type of request':request_type
+
+        }).then(function(docRef) {
+           nformSuccess();
+        })
+            .catch(function(error) {
+                nformError();
+            });
+
+
+    }
 
     function nformSuccess() {
         $("#newsletterForm")[0].reset();
-        nsubmitMSG(true, "Subscribed!");
+        nsubmitMSG(true, "Thanks for your feedback! Really Appreciate.");
         $("input").removeClass('notEmpty'); // resets the field label after submission
     }
 
